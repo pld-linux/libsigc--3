@@ -5,21 +5,21 @@
 #
 Summary:	The Typesafe Signal Framework for C++
 Summary(pl.UTF-8):	Środowisko sygnałów z kontrolą typów dla C++
-Name:		libsigc++
-Version:	2.10.2
+Name:		libsigc++3
+Version:	3.0.0
 Release:	1
 Epoch:		1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.10/%{name}-%{version}.tar.xz
-# Source0-md5:	1b067bfae0b502e6a5127336cb09d2dd
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libsigc++/3.0/libsigc++-%{version}.tar.xz
+# Source0-md5:	6ffe924f1d8624b5716468cde67dc03f
 URL:		https://libsigcplusplus.github.io/libsigcplusplus/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtool >= 2:2.0
 BuildRequires:	m4
-BuildRequires:	mm-common >= 0.9.10
+BuildRequires:	mm-common >= 0.9.12
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
@@ -53,7 +53,7 @@ Summary:	Development tools for the Typesafe Signal Framework for C++
 Summary(pl.UTF-8):	Narzędzia programistyczne do środowiska libsig++
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libstdc++-devel >= 6:4.7
+Requires:	libstdc++-devel >= 6:7
 Requires:	m4
 
 %description devel
@@ -87,7 +87,7 @@ Reference documentation for libsigc++.
 Szczegółowa dokumentacja dla libsigc++.
 
 %prep
-%setup -q
+%setup -q -n libsigc++-%{version}
 
 %build
 %{__libtoolize}
@@ -109,6 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libsigc-3.0.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -117,25 +120,24 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_libdir}/libsigc-2.0.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libsigc-2.0.so.0
+%doc AUTHORS ChangeLog NEWS README.md
+%attr(755,root,root) %{_libdir}/libsigc-3.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libsigc-3.0.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libsigc-2.0.so
-%{_libdir}/libsigc-2.0.la
-%{_includedir}/sigc++-2.0
-%{_libdir}/sigc++-2.0
-%{_pkgconfigdir}/sigc++-2.0.pc
+%attr(755,root,root) %{_libdir}/libsigc-3.0.so
+%{_includedir}/sigc++-3.0
+%{_libdir}/sigc++-3.0
+%{_pkgconfigdir}/sigc++-3.0.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libsigc-2.0.a
+%{_libdir}/libsigc-3.0.a
 %endif
 
 %files doc
 %defattr(644,root,root,755)
-%{_datadir}/devhelp/books/libsigc++-2.0
-%{_docdir}/libsigc++-2.0
+%{_datadir}/devhelp/books/libsigc++-3.0
+%{_docdir}/libsigc++-3.0
