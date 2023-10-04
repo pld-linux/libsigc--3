@@ -1,18 +1,18 @@
 #
 # Conditional build:
-%bcond_without	static_libs	# don't build static library
+%bcond_without	static_libs	# static library
 %bcond_without	tests		# check target
 #
 Summary:	The Typesafe Signal Framework for C++
 Summary(pl.UTF-8):	Środowisko sygnałów z kontrolą typów dla C++
 Name:		libsigc++3
-Version:	3.4.0
+Version:	3.6.0
 Release:	1
 Epoch:		1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/libsigc++/3.4/libsigc++-%{version}.tar.xz
-# Source0-md5:	3ac9b7dfa5500f277793661bc07e7a56
+Source0:	https://download.gnome.org/sources/libsigc++/3.6/libsigc++-%{version}.tar.xz
+# Source0-md5:	b7205d5465ac15fbc0c781d39b4011be
 URL:		https://libsigcplusplus.github.io/libsigcplusplus/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
@@ -125,7 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README.md
+%doc ChangeLog NEWS README.md
 %attr(755,root,root) %{_libdir}/libsigc-3.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libsigc-3.0.so.0
 
