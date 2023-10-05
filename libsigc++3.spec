@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_without	apidocs		# API documentation
 %bcond_without	static_libs	# static library
 %bcond_without	tests		# check target
 #
@@ -16,17 +17,18 @@ Source0:	https://download.gnome.org/sources/libsigc++/3.6/libsigc++-%{version}.t
 URL:		https://libsigcplusplus.github.io/libsigcplusplus/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	docbook-style-xsl-nons
-BuildRequires:	doxygen >= 1:1.8.9
-BuildRequires:	graphviz
+%{?with_apidocs:BuildRequires:	docbook-style-xsl-nons}
+%{?with_apidocs:BuildRequires:	doxygen >= 1:1.8.9}
+%{?with_apidocs:BuildRequires:	graphviz}
 BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtool >= 2:2.0
-BuildRequires:	libxslt-progs
+%{?with_apidocs:BuildRequires:	libxslt-progs}
 BuildRequires:	m4
 BuildRequires:	mm-common >= 0.9.12
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
+BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Obsoletes:	libsigc++-examples < 1
@@ -104,7 +106,8 @@ mm-common-prepare --copy --force
 %{__automake}
 %configure \
 	--disable-silent-rules \
-	%{?with_static_libs:--enable-static}
+	%{?with_static_libs:--enable-static} \
+	%{__enable_disable apidocs documentation}
 %{__make}
 
 %if %{with tests}
@@ -145,7 +148,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libsigc-3.0.a
 %endif
 
+%if %{with apidocs}
 %files doc
 %defattr(644,root,root,755)
 %{_datadir}/devhelp/books/libsigc++-3.0
 %{_docdir}/libsigc++-3.0
+%endif
