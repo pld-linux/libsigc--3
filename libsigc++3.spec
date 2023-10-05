@@ -16,9 +16,12 @@ Source0:	https://download.gnome.org/sources/libsigc++/3.6/libsigc++-%{version}.t
 URL:		https://libsigcplusplus.github.io/libsigcplusplus/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
+BuildRequires:	docbook-style-xsl-nons
 BuildRequires:	doxygen >= 1:1.8.9
+BuildRequires:	graphviz
 BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtool >= 2:2.0
+BuildRequires:	libxslt-progs
 BuildRequires:	m4
 BuildRequires:	mm-common >= 0.9.12
 BuildRequires:	perl-base
